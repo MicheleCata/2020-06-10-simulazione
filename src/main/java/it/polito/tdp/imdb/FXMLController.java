@@ -79,7 +79,22 @@ public class FXMLController {
 
     @FXML
     void doSimulazione(ActionEvent event) {
-
+    	txtResult.clear();
+    	Integer n = null;
+    	try {
+    		n = Integer.parseInt(txtGiorni.getText());
+    	} catch (NumberFormatException e) {
+        	txtResult.appendText("Inserisci un valore numerico per n!\n");;
+        	return ;
+    	}
+    	model.simula(n);
+    	
+    	txtResult.appendText("PAUSE: " + model.getPause() + "\n\n");
+    	txtResult.appendText("ATTORI INTERVISTATI: \n");
+    	for(Actor a : model.getAttoriIntervistati()) {
+    		txtResult.appendText(a.toString() + "\n");
+    	}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
